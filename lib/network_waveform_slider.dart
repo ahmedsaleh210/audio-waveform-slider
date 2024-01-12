@@ -82,7 +82,7 @@ class _AudioWaveFormSliderState extends State<AudioWaveFormSlider> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Audio Waveform Slider'),
         ),
         body: Center(
           child: Column(
