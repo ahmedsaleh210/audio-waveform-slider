@@ -81,44 +81,41 @@ class _AudioWaveFormSliderState extends State<AudioWaveFormSlider> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Scaffold(
-          appBar: AppBar(
-            title: const Text('Plugin example app'),
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: containerMargin),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.grey[200]),
+                child: AudioFileWaveforms(
+                    playerController: _controller,
+                    size: Size(MediaQuery.of(context).size.width, 100.0),
+                    waveformType: WaveformType.fitWidth,
+                    playerWaveStyle: playerWaveStyle),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    if (_isPlayed) {
+                      _controller.pausePlayer();
+                    } else {
+                      _controller.startPlayer(
+                        finishMode: FinishMode.loop,
+                      );
+                    }
+                    setState(() {
+                      _isPlayed = !_isPlayed;
+                    });
+                  },
+                  child: Text(_isPlayed ? 'Stop' : 'Play')),
+            ],
           ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: containerMargin),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blueAccent),
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.grey[200]),
-                  child: AudioFileWaveforms(
-                      playerController: _controller,
-                      size: Size(MediaQuery.of(context).size.width, 100.0),
-                      waveformType: WaveformType.fitWidth,
-                      playerWaveStyle: playerWaveStyle),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      if (_isPlayed) {
-                        _controller.pausePlayer();
-                      } else {
-                        _controller.startPlayer(
-                          finishMode: FinishMode.loop,
-                        );
-                      }
-                      setState(() {
-                        _isPlayed = !_isPlayed;
-                      });
-                    },
-                    child: Text(_isPlayed ? 'Stop' : 'Play')),
-              ],
-            ),
-          )),
-    );
+        ));
   }
 }
